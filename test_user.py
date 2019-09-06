@@ -29,7 +29,18 @@ class TestUser(unittest.TestCase):
         ''' 
         self.new_user_account.save_user()
         self.assertEqual(len(User.user_holder),1)
-    
+        
+        #SAVING MULTIPLE LOGIN DETAILS
+    def test_save_multiple_user(self):
+        '''
+        test_save_multiple_user to check if we can save multiple user
+        objects to our user_holder
+        '''  
+        self.new_user_account.save_user()
+        test_user = User("rita","kaka1")
+        test_user.save_user()
+        self.assertEqual(len(User.user_holder),2)
+
 
 
 if __name__ == '__main__':
