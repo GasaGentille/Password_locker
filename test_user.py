@@ -95,6 +95,26 @@ class TestCredintial(unittest.TestCase):
         test_credential.save_credential()
         self.assertEqual(len(Credential.credential_holder),2)
 
+     # DELETE CREDENTIAL ACCOUNT
+    def test_delete_credential(self):
+        '''
+            test_delete_credential to test if we can remove a credential account from our credential_holder
+        '''
+        self.new_credential_account.save_credential()
+        test_credential = Credential("facebook","kessy","kssy2")
+        test_credential.save_credential()
+        self.new_credential_account.delete_credential()
+        self.assertEqual(len(Credential.credential_holder),1)
+
+    def test_find_credential_by_password(self):
+        '''
+        test to check if we can find credentials by password and display information
+        '''
+        self.new_credential_account.save_credential()
+        test_credential = Credential("instagram","gent","40@40")
+        test_credential.save_credential()
+        found_credential_account = Credential.find_by_password("20@20")
+        self.assertEqual(found_credential_account.credential_username,test_credential.credential_username)
 
 
 
