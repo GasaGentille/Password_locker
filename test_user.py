@@ -22,7 +22,13 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.new_user_account.user_password ,"555a" )
         
         #SAVING OUR LOGIN DETAILS
-
+    def test_save_user(self):
+        '''
+        test_save_user test case to test if the user object is saved into
+         the user_holder
+        ''' 
+        self.new_user_account.save_user()
+        self.assertEqual(len(User.user_holder),1)
     
 
 
