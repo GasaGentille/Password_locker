@@ -38,9 +38,30 @@ class Credential:
         self.social_media= credential_name
         self.credential_username =username
         self.credential_password = password
+
     def save_credential(self):
-        
+
         '''
         save_credential method saves credential objects into credential_holder
         '''
-       Credential.credential_holder.append(self)
+        Credential.credential_holder.append(self)
+     # DELETE CREDENTIAL
+    def delete_credential(self):
+        '''
+        delete_credential method deletes a saved credential from the credential_holder
+        '''
+        Credential.credential_holder.remove(self)
+     # WHEN LOGIN USER VIEW CREDENTIALS
+    @classmethod
+    def find_by_password(cls,password):
+        '''
+        Method that takes in a password and returns a credential that matches that password.
+
+        Args:
+            password: credential_password to search for
+        Returns :
+            Credential of person that matches the password.
+        '''
+        for credential in cls.credential_holder:
+            if credential.credential_password == password:
+                return credential
