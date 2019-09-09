@@ -20,6 +20,8 @@ class User:
         '''
         User.user_holder.append(self)
 
+# globals database = {};
+
 class Credential:
     """
     Class that generates new instances of credential accounts
@@ -65,3 +67,7 @@ class Credential:
         for credential in cls.credential_holder:
             if credential.credential_password == password:
                 return credential
+            
+            
+    def storeCredentials(self):
+        pass

@@ -1,128 +1,89 @@
-from user_account import User
-from user_account import Credential
+import pyperclip
+import random
+import string
 
-#CREATE
-def create_user(username,password):
-    '''
-    Function to create a new user_account
-    '''
-    new_user = User(username,password)
-    return new_user
+from user_credentials import User
+from user_credentials import Credential
 
-def create_credential(credential_name,username,password):
-    '''
-    Function to create a new credential_account
-    '''
-    new_credential = Credential(credential_name,username,password)
-    return new_credential
 
-#SAVE
-def save_user(user):
+def generate_password(size=8, char=string.ascii_uppercase+string.ascii_lowercase+string.digits):
+		'''
+		Function to generate an 8 character password for a credential
+		'''
+		gen_pass=''.join(random.choice(char) for _ in range(size))
+		return gen_pass
+
+
+while True:
+    print("Welcome, pleaser SignUp by providing the Username and Password\n")
+    uname = input("username: \n")
+    pwd = ""
+    print("Do you want the system to generate a password for you? Y/N \n")
+    rs = input().lower()
+    if(rs == "y"):
+        print("you can choose the size of the password you want by entering the number of characters \n")
+        rrs = input("do you what to choose characters? Y/N: ").lower()
+        if(rrs == "y"):
+            size = int(input("Enter the size you want: "))
+            pwd = generate_password(size)
+        else:
+            pwd = generate_password()
+        print("your password is: ")
+        print(pwd)
+    else:
+        pwd = input("password: \n")
+    nuser = User(uname, pwd)
     
-    '''
-    Function to save user
-    '''
-    user.save_user()
+    print("\n")
     
-def save_credential(credential):
-    
-    '''
-    Function to save credential
-    '''
-    credential.save_credential()
-    
-    
-# DELETE CREDENTIAL
+    logIn = input("Enter your Password to logIn into the System: \n")
+    if(logIn == nuser.user_holder[1]):
+        print(f"Welcome {nuser.user_holder[0]} you are in what do you want to do?")
+        while True:
+                print("Use these short codes : cc - create new credential account, dc - display credentials, fc - find credential, del - to delete credential ex -exit the user list ")
 
-def del_credential(credential):
-    '''
-    Function to delete credential
-    '''
-    credential.delete_credential()
-    
-# FIND CREDENTIAL
+                short_code = input().lower()
 
-def find_credential(password):
-    '''
-    Function that finds credential by password and returns the credential
-    '''
-    return Credential.find_by_password(password)
-    
-def main():
-    print("Hello Welcome to your user holder. What is your name?")
-    user_name = input()
-
-    print(f"Hello {user_name}. what would you like to do?")
-    print('\n')
-
-    while True:
-            print("Use these short codes : cc - create a new user_account, dc - display contacts, fc -find credential, ex -exit the user list ")
-
-            short_code = input().lower()
-
-            if short_code == 'cc':
-                    print("New User")
-                    print("-"*10)
-
-                    print ("Username....")
-                    username = input()
-
-                    print("Password ...")
-                    password = input()
-
-                    # print("Phone number ...")
-                    # p_number = input()
-
-                    # print("Email address ...")
-                    # e_address = input()
-
-
-                    save_user(create_user(username,password)) # create and save new contact.
-                    print ('\n')
-                    print(f"New User {username} {password} created")
-                    print ('\n')
-
-            # elif short_code == 'dc':
-
-            #         if display_contacts():
-            #                 print("Here is a list of all your contacts")
-            #                 print('\n')
-
-            #                 for contact in display_contacts():
-            #                         print(f"{contact.first_name} {contact.last_name} .....{contact.phone_number}")
-
-            #                 print('\n')
-            #         else:
-            #                 print('\n')
-            #                 print("You dont seem to have any contacts saved yet")
-            #                 print('\n')
-
-            elif short_code == 'fc':
-
-                    print("Enter the password you want to search for")
-
-                    search_password = input()
-                    if check_existing_contacts(search_password):
-                            search_password = find_credential(search_password)
-                            print(f"{search_credential.username} {search_credential.password}")
-                            print('-' * 20)
-
-                            # print(f"Phone number.......{search_contact.phone_number}")
-                            # print(f"Email address.......{search_contact.email}")
-                    else:
-                            print("That credential does not exist")
-
-            elif short_code == "ex":
-                    print("Bye .......")
+                if(short_code == "ex"):
                     break
-            else:
-                    print("I really didn't get that. Please use the short codes")  
-if __name__ == '__main__':
+                # elif( short_code == "cu"):
+                #     print("Welcome, pleaser SignUp by providing the Username and Password\n")
+                #     uname = input("username: \n")
+                #     pwd = input("password: \n")
+                #     new_user = User(uname, pwd)
+                elif(short_code == "cc"):
+                    print("Please provide account information\n")
+                    accname = input("input account name\n")
+                    username = input("input username\n")
+                    password = input("input password\n")
+                    new_crt = Credential(accname, username, password)
+                    
+                    new_crt.save_credentials
+                    
+                    print(new_crt.credential_holder)
+                    
+                    
+                    
+                elif(short_code == "del"):
+                    print("Warning by contuning you will delete a credential informations,")
+                    res = input("are you sure you want to processed? : Y/N ").lower()
+                    if(res == "y"):
+                        Credential.delete_credentials(Credential.credential_holder)
+                        # print(userAccountsInfo)
+                    elif(res == "n"):
+                        pass
+                elif(short_code == "dc"):
+                    userAccountsInfo = dict()
+                    userAccountsInfo.update([(f"{nuser.user_holder[1]}",f"{Credential.credential_holder}")])
+                    print(userAccountsInfo)
+                    # Credential
+                elif(short_code == "fc"):
+                    print("Enter the site name to copy to clipboard: \n")
+                    sname = input()
+                    rsult = Credential.find_by_site_name(sname)
+                    Credential.copy_credential(rsult)
 
-    main()
-
-
-
-
-
-    
+        
+    else:
+        print("wrong password please try again")
+    break
