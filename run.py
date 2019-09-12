@@ -15,7 +15,7 @@ def generate_password(size=8, char=string.ascii_uppercase+string.ascii_lowercase
 
 
 while True:
-    print("Welcome, pleaser SignUp by providing the Username and Password\n")
+    print("Welcome, please SignUp by providing the Username and Password\n")
     uname = input("username: \n")
     pwd = ""
     print("Do you want the system to generate a password for you? Y/N \n")
@@ -24,7 +24,7 @@ while True:
         print("you can choose the size of the password you want by entering the number of characters \n")
         rrs = input("do you what to choose characters? Y/N: ").lower()
         if(rrs == "y"):
-            size = int(input("Enter the size you want: "))
+            size = int(input("Enter the size you want your password to have: "))
             pwd = generate_password(size)
         else:
             pwd = generate_password()
@@ -38,7 +38,7 @@ while True:
     
     logIn = input("Enter your Password to logIn into the System: \n")
     if(logIn == nuser.user_holder[1]):
-        print(f"Welcome {nuser.user_holder[0]} you are in what do you want to do?")
+        print(f"Welcome {nuser.user_holder[0]} you are in what do you want to do(use short code)?")
         while True:
                 print("Use these short codes : cc - create new credential account, dc - display credentials, fc - find credential, del - to delete credential ex -exit the user list ")
 
@@ -46,11 +46,7 @@ while True:
 
                 if(short_code == "ex"):
                     break
-                # elif( short_code == "cu"):
-                #     print("Welcome, pleaser SignUp by providing the Username and Password\n")
-                #     uname = input("username: \n")
-                #     pwd = input("password: \n")
-                #     new_user = User(uname, pwd)
+               
                 elif(short_code == "cc"):
                     print("Please provide account information\n")
                     accname = input("input account name\n")
@@ -69,7 +65,7 @@ while True:
                     res = input("are you sure you want to processed? : Y/N ").lower()
                     if(res == "y"):
                         Credential.delete_credentials(Credential.credential_holder)
-                        # print(userAccountsInfo)
+                       
                     elif(res == "n"):
                         pass
                 elif(short_code == "dc"):
