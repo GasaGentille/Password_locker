@@ -39,5 +39,5 @@ To run the tests for the class file:
 # Technologies Used
 Python3.6
 
-#Copyright and license
+# Copyright and license
 (c)2019 Password-Locker
