@@ -4,6 +4,9 @@ The application helps users to manage their passwords , to generate new password
 User Stories
 These are the behaviours/features that the application implements for use by a user.
 
+# BUILD BY
+Gentille Moringa School
+
 # User Stories
 
 These are the behaviours/features that the application implements for use by a user.
@@ -35,3 +38,6 @@ To run the tests for the class file:
   $ python3.6 test_user_credentials.py
 # Technologies Used
 Python3.6
+
+#Copyright and license
+(c)2019 Password-Locker
